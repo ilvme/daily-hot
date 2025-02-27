@@ -1,6 +1,4 @@
-import { Platform } from '@/types';
-
-export const platforms: Platform[] = [
+export const platforms = [
   {
     id: 'bilibili',
     name: '哔哩哔哩',

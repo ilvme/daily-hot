@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowPathIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
-import { HotList } from '@/types';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
@@ -9,27 +8,18 @@ import 'dayjs/locale/zh-cn';
 dayjs.extend(relativeTime);
 dayjs.locale('zh-cn');
 
-interface HotCardProps {
-  data: HotList;
-  onRefresh: () => void;
-}
-
-export default function HotCard({ data, onRefresh }: HotCardProps) {
+export default function HotCard({ data, onRefresh }) {
   const { platform, name, title, icon, items, updateTime } = data;
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.3)] overflow-hidden h-[400px] flex flex-col transition-transform">
-      <div className="px-5 py-3 flex items-center justify-between border-b border-gray-100 dark:border-gray-700">
+      <div className="px-4 py-3 flex items-center justify-between border-b border-gray-100 dark:border-gray-700">
         <div className="flex items-center space-x-2">
-          <div className="relative w-8 h-8 rounded-lg overflow-hidden shadow-inner">
-            <Image
-              src={icon}
-              alt={platform}
-              fill
-              className="object-cover"
+          <div className="relative w-6 h-6 rounded-lg overflow-hidden shadow-inner">
+            <Image src={icon} alt={platform} fill className="object-cover"
             />
           </div>
-          <h2 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">{name}</h2>
+          <h2 className="text-x font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">{name}</h2>
         </div>
         <h3 className="text-sm text-gray-600 dark:text-gray-400">{title}</h3>
       </div>
@@ -56,18 +46,18 @@ export default function HotCard({ data, onRefresh }: HotCardProps) {
           <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
           <span>{dayjs(updateTime).fromNow()}更新</span>
         </span>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2">
           <button
             onClick={onRefresh}
             className="flex items-center space-x-1 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
           >
-            <ArrowPathIcon className="w-4 h-4" />
+            <ArrowPathIcon className="w-5 h-5" />
           </button>
           <Link
             href={`/list?plantform=${platform}`}
             className="flex items-center space-x-1 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
           >
-            <EllipsisHorizontalIcon className="w-4 h-4" />
+            <EllipsisHorizontalIcon className="w-5 h-5" />
           </Link>
           
         </div>

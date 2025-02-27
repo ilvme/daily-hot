@@ -2,18 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
-import HotCard from '@/components/HotCard';
-import { platforms } from '@/config/platforms';
-import { HotList } from '@/types';
+import HotCard from '../components/HotCard';
+import { platforms } from '../config/platforms';
 import { ArrowUpIcon } from '@heroicons/react/24/outline';
 
-const fetcher = (url: string) => fetch(url).then(res => res.json());
+const fetcher = (url) => fetch(url).then(res => res.json());
 
 export default function Home() {
-  const [refreshKeys, setRefreshKeys] = useState<Record<string, number>>({});
+  const [refreshKeys, setRefreshKeys] = useState({});
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const refreshPlatform = (platform: string) => {
+  const refreshPlatform = (platform) => {
     setRefreshKeys(prev => ({
       ...prev,
       [platform]: Date.now()
@@ -38,7 +37,7 @@ export default function Home() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
           {platforms.map(platform => {
-            const { data } = useSWR<HotList>(
+            const { data } = useSWR(
               `${platform.api}?t=${refreshKeys[platform.id] || ''}`,
               fetcher
             );
