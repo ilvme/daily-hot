@@ -57,18 +57,20 @@ export default function Header() {
           <Link href='/'>每日热榜</Link>
         </h1>
 
-        <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
-        <span className="text-sm">
-            {`${currentTime.getFullYear()}年${currentTime.getMonth() + 1}月${currentTime.getDate()}日`}
-          </span>
-          <time className="text-sm">
-            {currentTime.toLocaleTimeString('zh-CN', { hour12: false })}
-          </time>
-          
-          <span className="text-sm">{weekDays[currentTime.getDay()]}</span>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            {`农历${lunar.lunarMonthName}${lunar.lunarDayName}`}
-          </span>
+        <div className="flex-col justify-items-center">
+          <div className="flex items-center space-x-1 text-gray-600 dark:text-gray-300">
+            <span className="text-sm">
+              {`${currentTime.getFullYear()} 年 ${currentTime.getMonth() + 1} 月 ${currentTime.getDate()}日`}
+            </span>
+            <time className="text-sm">{currentTime.toLocaleTimeString('zh-CN', {hour12: false})}</time>
+            <span className="text-sm">{weekDays[currentTime.getDay()]}</span>
+          </div>
+
+          <div className="flex items-center space-x-1 text-gray-600 dark:text-gray-300">
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              {`${lunar.GanZhiYear}年 ${lunar.GanZhiMonth}月 ${lunar.GanZhiDay}日 农历${lunar.lunarMonthName}${lunar.lunarDayName}`}
+            </span>
+          </div>
         </div>
 
         <div>
