@@ -61,7 +61,7 @@ export default function Header() {
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2 group">
           <div className="relative w-14 h-14">
-            <Image src="/hot.png" alt="Logo" fill className="object-contain" />
+            <Image src="/logo.png" alt="Logo" fill className="object-contain" />
           </div>
           <div>
             <h1 className="font-bold text-2xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
