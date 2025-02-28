@@ -9,22 +9,19 @@ import useSWR from 'swr';
 dayjs.extend(relativeTime);
 dayjs.locale('zh-cn');
 
-const fetcher = (url) => fetch(url).then(res => res.json());
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function HotCard({ platform, name, title, icon, api }) {
   const [isTimeout, setIsTimeout] = useState(false);
+
   const [refreshKey, setRefreshKey] = useState('');
 
-  const { data, error } = useSWR(
-    `${api}?t=${refreshKey}`,
-    fetcher,
-    { 
-      revalidateOnFocus: false,
-      refreshInterval: 300000,
-      shouldRetryOnError: true,
-      errorRetryCount: 3
-    }
-  );
+  const { data, error } = useSWR(`${api}?t=${refreshKey}`, fetcher, {
+    revalidateOnFocus: false,
+    refreshInterval: 300000,
+    shouldRetryOnError: true,
+    errorRetryCount: 3,
+  });
 
   const items = data?.data;
   const updateTime = data?.updateTime || new Date().toISOString();
@@ -84,7 +81,9 @@ export default function HotCard({ platform, name, title, icon, api }) {
             rel="noopener noreferrer"
             className="flex items-start px-4 py-1.5 hover:bg-gray-50/80 dark:hover:bg-gray-700/50 transition-all duration-200 group"
           >
-            <span className={`w-6 mr-2 font-medium rounded-md text-center ${index < 3 ? 'text-white' : 'bg-gray-100 dark:bg-gray-500'} ${index === 0 ? 'bg-red-600' : index === 1 ? 'bg-orange-500' : index === 2 ? 'bg-yellow-500' : ''}`}>
+            <span
+              className={`w-6 mr-2 font-medium rounded-md text-center ${index < 3 ? 'text-white' : 'bg-gray-100 dark:bg-gray-500'} ${index === 0 ? 'bg-red-600' : index === 1 ? 'bg-orange-500' : index === 2 ? 'bg-yellow-500' : ''}`}
+            >
               {index + 1}
             </span>
             <span className="flex-1 font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 whitespace-pre-wrap break-words">
@@ -103,7 +102,9 @@ export default function HotCard({ platform, name, title, icon, api }) {
           <div className="relative w-6 h-6 rounded-lg overflow-hidden shadow-inner">
             <Image src={icon} alt={platform} fill className="object-cover" />
           </div>
-          <h2 className="text-x font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">{name}</h2>
+          <h2 className="text-x font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
+            {name}
+          </h2>
         </div>
         <h3 className="text-sm text-gray-600 dark:text-gray-400">{title}</h3>
       </div>

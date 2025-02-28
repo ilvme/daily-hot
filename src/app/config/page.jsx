@@ -3,8 +3,20 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Switch } from '@headlessui/react';
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { platforms } from '../../config/platforms';
@@ -20,8 +32,14 @@ function SortableItem({ id, name, title, icon, enabled, onToggle }) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 w-full cursor-move">
-      <div className="flex items-center space-x-2">
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 w-full cursor-move"
+    >
+      <div className="flex items-center space-x-4">
         <div className="relative w-6 h-6">
           <Image src={icon} alt={name} fill className="object-contain" />
         </div>
@@ -64,25 +82,25 @@ export default function ConfigPage() {
       const savedConfig = localStorage.getItem('platformConfig');
       if (savedConfig) {
         const parsedConfig = JSON.parse(savedConfig);
-        const updatedConfig = platforms.map(platform => {
-          const existingPlatform = parsedConfig.find(p => p.id === platform.id);
+        const updatedConfig = platforms.map((platform) => {
+          const existingPlatform = parsedConfig.find((p) => p.id === platform.id);
           return existingPlatform || { ...platform, enabled: true };
         });
         setItems(updatedConfig);
         localStorage.setItem('platformConfig', JSON.stringify(updatedConfig));
       } else {
-        const initialItems = platforms.map(platform => ({
+        const initialItems = platforms.map((platform) => ({
           ...platform,
-          enabled: true
+          enabled: true,
         }));
         setItems(initialItems);
         localStorage.setItem('platformConfig', JSON.stringify(initialItems));
       }
     } catch (error) {
       console.error('Error loading platform config:', error);
-      const initialItems = platforms.map(platform => ({
+      const initialItems = platforms.map((platform) => ({
         ...platform,
-        enabled: true
+        enabled: true,
       }));
       setItems(initialItems);
       localStorage.setItem('platformConfig', JSON.stringify(initialItems));
@@ -104,7 +122,7 @@ export default function ConfigPage() {
 
   const handleToggle = (id) => {
     setItems((prevItems) => {
-      const newItems = prevItems.map(item =>
+      const newItems = prevItems.map((item) =>
         item.id === id ? { ...item, enabled: !item.enabled } : item
       );
       localStorage.setItem('platformConfig', JSON.stringify(newItems));
@@ -116,19 +134,26 @@ export default function ConfigPage() {
     <main className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">平台配置</h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">拖拽调整平台顺序，开关控制平台显示状态</p>
-          
+          <div className="flex items-center gap-3 mb-6">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">平台配置</h1>
+            <p className="text-amber-500 dark:text-amber-400 text-sm">
+              网站配置功能开发中，功能尚不稳定
+            </p>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            拖拽调整平台顺序，开关控制平台显示状态
+          </p>
+
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
           >
             <SortableContext
-              items={items.map(item => item.id)}
+              items={items.map((item) => item.id)}
               strategy={verticalListSortingStrategy}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 {items.map((item) => (
                   <SortableItem
                     key={item.id}

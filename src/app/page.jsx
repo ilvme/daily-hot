@@ -27,7 +27,7 @@ export default function Home() {
     if (savedConfig) {
       setConfiguredPlatforms(JSON.parse(savedConfig));
     } else {
-      setConfiguredPlatforms(platforms.map(platform => ({ ...platform, enabled: true })));
+      setConfiguredPlatforms(platforms.map((platform) => ({ ...platform, enabled: true })));
     }
   }, []);
 
@@ -36,7 +36,7 @@ export default function Home() {
       <div className="container mx-auto px-2 py-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
           {configuredPlatforms
-            .filter(platform => platform.enabled)
+            .filter((platform) => platform.enabled)
             .map((platform) => (
               <HotCard
                 key={platform.id}

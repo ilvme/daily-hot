@@ -5,8 +5,8 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col items-center justify-center space-y-2">
           <p className="text-sm text-gray-600 dark:text-gray-300">
-           今日热榜 ©&nbsp;
-           <a
+            今日热榜 ©&nbsp;
+            <a
               href="https://ikangjia.cn"
               target="_blank"
               rel="noopener noreferrer"
