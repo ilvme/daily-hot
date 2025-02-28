@@ -13,7 +13,7 @@ export default function HotCard({ data, onRefresh }) {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.3)] overflow-hidden h-[410px] flex flex-col transition-transform">
-      <div className="px-3 py-3 flex items-center justify-between">
+      <div className="px-4 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="relative w-6 h-6 rounded-lg overflow-hidden shadow-inner">
             <Image src={icon} alt={platform} fill className="object-cover"
@@ -32,7 +32,7 @@ export default function HotCard({ data, onRefresh }) {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-start px-3 py-1.5 hover:bg-gray-50/80 dark:hover:bg-gray-700/50 transition-all duration-200 group"
+            className="flex items-start px-4 py-1.5 hover:bg-gray-50/80 dark:hover:bg-gray-700/50 transition-all duration-200 group"
           >
             <span className={`w-6 mr-2 font-medium rounded-md text-center ${index < 3 ? 'text-white' : 'bg-gray-100 dark:bg-gray-500'} ${index === 0 ? 'bg-red-600' : index === 1 ? 'bg-orange-500' : index === 2 ? 'bg-yellow-500' : ''}`}>
               {index + 1}
@@ -44,7 +44,7 @@ export default function HotCard({ data, onRefresh }) {
         ))}
       </div>
 
-      <div className="px-3 py-1.5 flex items-center justify-between text-xs text-gray-500 bg-gray-50/50 dark:bg-gray-800/50">
+      <div className="px-4 py-1.5 flex items-center justify-between text-xs text-gray-500 bg-gray-50/50 dark:bg-gray-800/50">
         <span className="flex items-center space-x-1">
           <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
           <span>{dayjs(updateTime).fromNow()}更新</span>
