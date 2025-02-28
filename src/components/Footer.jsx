@@ -1,8 +1,4 @@
 'use client';
-
-import dayjs from "dayjs";
-
-
 export default function Footer() {
   return (
     <footer className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-sm mt-auto">

@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 import { useEffect, useState } from 'react';
 import Link  from 'next/link';
 
@@ -53,9 +55,22 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-sm">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
-          <Link href='/'>每日热榜</Link>
-        </h1>
+      <Link href='/' className="flex items-center space-x-4 group">
+        <div className="relative w-10 h-10 scale-120">
+          <Image
+            src="/hot.png"
+            alt="热榜图标"
+            fill
+            className="object-contain"
+          />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
+            每日热榜
+          </h1>
+          <span className="text-xs text-gray-600 dark:text-gray-400">汇聚全网热点，新闻一览无余</span>
+        </div>
+      </Link>
 
         <div className="flex-col justify-items-center">
           <div className="flex items-center space-x-1 text-gray-600 dark:text-gray-300">
