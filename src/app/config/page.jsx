@@ -20,6 +20,7 @@ import {
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { platforms } from '../../config/platforms';
+import BackToTop from '../../components/BackToTop.jsx';
 
 function SortableItem({ id, name, title, icon, enabled, onToggle }) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
@@ -40,7 +41,7 @@ function SortableItem({ id, name, title, icon, enabled, onToggle }) {
       className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 w-full cursor-move"
     >
       <div className="flex items-center space-x-4">
-        <div className="relative w-6 h-6">
+        <div className="relative w-8 h-8">
           <Image src={icon} alt={name} fill className="object-contain" />
         </div>
         <div>
@@ -52,7 +53,7 @@ function SortableItem({ id, name, title, icon, enabled, onToggle }) {
         <Switch
           checked={enabled}
           onChange={() => onToggle()}
-          className={`${enabled ? 'bg-blue-600' : 'bg-gray-200'} relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+          className={`${enabled ? 'bg-red-400 dark:bg-red-800' : 'bg-gray-200 dark:bg-gray-500'} relative inline-flex h-5 w-9 items-center rounded-full transition-colors`}
         >
           <span className="sr-only">启用 {name}</span>
           <span
@@ -170,6 +171,9 @@ export default function ConfigPage() {
           </DndContext>
         </div>
       </div>
+
+      {/*返回顶部*/}
+      <BackToTop />
     </main>
   );
 }

@@ -3,24 +3,10 @@
 import { useState, useEffect } from 'react';
 import HotCard from '../components/HotCard';
 import { platforms } from '../config/platforms';
-import { ArrowUpIcon } from '@heroicons/react/24/outline';
+import BackToTop from '../components/BackToTop.jsx';
 
 export default function Home() {
-  const [showScrollTop, setShowScrollTop] = useState(false);
   const [configuredPlatforms, setConfiguredPlatforms] = useState([]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   useEffect(() => {
     const savedConfig = localStorage.getItem('platformConfig');
@@ -49,14 +35,9 @@ export default function Home() {
             ))}
         </div>
       </div>
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-110"
-        >
-          <ArrowUpIcon className="w-6 h-6 text-gray-600 dark:text-gray-300" />
-        </button>
-      )}
+
+      {/*返回顶部*/}
+      <BackToTop />
     </main>
   );
 }
