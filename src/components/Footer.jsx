@@ -43,6 +43,15 @@ export default function Footer() {
             >
               Vercel
             </a>
+            &&nbsp;
+            <a
+              href="https://www.trae.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gray-900 dark:hover:text-gray-200 transition-colors underline"
+            >
+              Trae
+            </a>
             .
           </div>
         </div>
