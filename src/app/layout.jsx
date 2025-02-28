@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: '今日热榜 - 全网热点新闻一览无余',
+  title: '今日热榜 - 全网新闻热点尽握掌中',
   description: '今日热榜, 聚合全网新闻热点，让你一目了然~',
   keywords: ['今日热榜, 新闻热点', '新闻', '热点', '微博热搜', '抖音热搜', ''],
   author: {name :'林深时觉寒', url: 'https://ikangjia.cn' },

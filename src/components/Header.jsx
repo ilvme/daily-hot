@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { useEffect, useState } from 'react';
 import Link  from 'next/link';
+import { Cog6ToothIcon } from '@heroicons/react/24/outline';
 
 const lunarCalendar = require('lunar-calendar');
 
@@ -65,7 +66,7 @@ export default function Header() {
             <h1 className="font-bold text-2xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
               今日热榜
             </h1>
-            <span className="text-xs text-gray-600 dark:text-gray-400">汇聚全网热点，新闻一览无余</span>
+            <span className="text-xs text-gray-600 dark:text-gray-400">汇聚全网新闻，热点尽握掌中</span>
           </div>
         </Link>
 
@@ -85,8 +86,8 @@ export default function Header() {
           </div>
         </div>
 
-        <Link href="/config" className="px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-          配置
+        <Link href="/config" className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+          <Cog6ToothIcon className="w-6 h-6 text-gray-600 dark:text-gray-300" />
         </Link>
       </div>
     </header>
