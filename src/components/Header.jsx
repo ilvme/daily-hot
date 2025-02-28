@@ -74,7 +74,7 @@ export default function Header() {
             <span className="text-sm">
               {`${currentTime.getFullYear()} 年 ${currentTime.getMonth() + 1} 月 ${currentTime.getDate()}日`}
             </span>
-            <time className="text-sm">{currentTime.toLocaleTimeString('zh-CN', {hour12: false})}</time>
+            <span className="text-sm">{currentTime.toLocaleTimeString('zh-CN', {hour12: false})}</span>
             <span className="text-sm">{weekDays[currentTime.getDay()]}</span>
           </div>
 
@@ -86,7 +86,7 @@ export default function Header() {
         </div>
 
         <Link href="/config" className="px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-          
+          配置
         </Link>
       </div>
     </header>

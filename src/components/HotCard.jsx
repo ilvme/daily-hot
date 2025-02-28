@@ -4,13 +4,30 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/zh-cn';
 import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 
 dayjs.extend(relativeTime);
 dayjs.locale('zh-cn');
 
-export default function HotCard({ data, onRefresh }) {
-  const { platform, name, title, icon, items, updateTime } = data;
+const fetcher = (url) => fetch(url).then(res => res.json());
+
+export default function HotCard({ platform, name, title, icon, api }) {
   const [isTimeout, setIsTimeout] = useState(false);
+  const [refreshKey, setRefreshKey] = useState('');
+
+  const { data, error } = useSWR(
+    `${api}?t=${refreshKey}`,
+    fetcher,
+    { 
+      revalidateOnFocus: false,
+      refreshInterval: 300000,
+      shouldRetryOnError: true,
+      errorRetryCount: 3
+    }
+  );
+
+  const items = data?.data;
+  const updateTime = data?.updateTime || new Date().toISOString();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -21,6 +38,10 @@ export default function HotCard({ data, onRefresh }) {
 
     return () => clearTimeout(timer);
   }, [items]);
+
+  const handleRefresh = () => {
+    setRefreshKey(Date.now().toString());
+  };
 
   const renderContent = () => {
     if (!items) {
@@ -96,7 +117,7 @@ export default function HotCard({ data, onRefresh }) {
         </span>
         <div className="flex items-center space-x-2">
           <button
-            onClick={onRefresh}
+            onClick={handleRefresh}
             className="flex items-center space-x-1 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 group"
           >
             <ArrowPathIcon className="w-5 h-5 group-active:animate-spin" />
