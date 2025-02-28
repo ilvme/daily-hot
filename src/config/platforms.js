@@ -282,4 +282,25 @@ export const platforms = [
     icon: '/logos/woshipm.png',
     api: 'https://api.ikangjia.cn/weatheralarm'
   },
+  {
+    id: 'nodeseek',
+    name: 'NodeSeek',
+    title: '最新动态',
+    icon: '/logos/woshipm.png',
+    api: 'https://api.ikangjia.cn/nodeseek'
+  },
+  {
+    id: '52pojie',
+    name: '吾爱破解',
+    title: '榜单',
+    icon: '/logos/woshipm.png',
+    api: 'https://api.ikangjia.cn/52pojie'
+  },
+  {
+    id: 'guokr',
+    name: '果壳',
+    title: '热门文章',
+    icon: '/logos/woshipm.png',
+    api: 'https://api.ikangjia.cn/guokr'
+  },
 ];

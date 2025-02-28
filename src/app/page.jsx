@@ -39,7 +39,8 @@ export default function Home() {
           {platforms.map(platform => {
             const { data } = useSWR(
               `${platform.api}?t=${refreshKeys[platform.id] || ''}`,
-              fetcher
+              fetcher,
+              { revalidateOnFocus: false }
             );
             return (
               <HotCard
@@ -49,7 +50,7 @@ export default function Home() {
                   title: platform.title,
                   name: platform.name,
                   icon: platform.icon,
-                  items: data?.data || [],
+                  items: data?.data,
                   updateTime: data?.updateTime || new Date().toISOString()
                 }}
                 onRefresh={() => refreshPlatform(platform.id)}
