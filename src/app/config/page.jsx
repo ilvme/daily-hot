@@ -3,43 +3,12 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Switch } from '@headlessui/react';
-import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import { platforms } from '../../config/platforms';
 import BackToTop from '../../components/BackToTop.jsx';
 
-function SortableItem({ id, name, title, icon, enabled, onToggle }) {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    position: 'relative',
-    zIndex: transform ? 1 : 'auto',
-  };
-
+function PlatformItem({ id, name, title, icon, enabled, onToggle }) {
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-      className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 w-full cursor-move"
-    >
+    <div className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 w-full">
       <div className="flex items-center space-x-4">
         <div className="relative w-8 h-8">
           <Image src={icon} alt={name} fill className="object-contain" />
@@ -67,16 +36,6 @@ function SortableItem({ id, name, title, icon, enabled, onToggle }) {
 
 export default function ConfigPage() {
   const [items, setItems] = useState([]);
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 8,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
 
   useEffect(() => {
     try {
@@ -108,19 +67,6 @@ export default function ConfigPage() {
     }
   }, []);
 
-  const handleDragEnd = (event) => {
-    const { active, over } = event;
-    if (active.id !== over.id) {
-      setItems((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
-        const newItems = arrayMove(items, oldIndex, newIndex);
-        localStorage.setItem('platformConfig', JSON.stringify(newItems));
-        return newItems;
-      });
-    }
-  };
-
   const handleToggle = (id) => {
     setItems((prevItems) => {
       const newItems = prevItems.map((item) =>
@@ -142,37 +88,25 @@ export default function ConfigPage() {
             </p>
           </div>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            拖拽调整平台顺序，开关控制平台显示状态
+            开关控制平台显示状态
           </p>
 
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCenter}
-            onDragEnd={handleDragEnd}
-          >
-            <SortableContext
-              items={items.map((item) => item.id)}
-              strategy={verticalListSortingStrategy}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                {items.map((item) => (
-                  <SortableItem
-                    key={item.id}
-                    id={item.id}
-                    name={item.name}
-                    title={item.title}
-                    icon={item.icon}
-                    enabled={item.enabled}
-                    onToggle={() => handleToggle(item.id)}
-                  />
-                ))}
-              </div>
-            </SortableContext>
-          </DndContext>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {items.map((item) => (
+              <PlatformItem
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                title={item.title}
+                icon={item.icon}
+                enabled={item.enabled}
+                onToggle={() => handleToggle(item.id)}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
-      {/*返回顶部*/}
       <BackToTop />
     </main>
   );
