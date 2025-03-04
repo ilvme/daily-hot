@@ -135,18 +135,18 @@ export const platforms = [
     api: 'https://api.ikangjia.cn/csdn',
   },
   {
+    id: 'v2ex',
+    name: 'V2EX',
+    title: '最热',
+    icon: '/logos/v2ex.png',
+    api: 'https://api.ikangjia.cn/v2ex',
+  },
+  {
     id: 'zhihu-daily',
     name: '知乎日报',
     title: '日报',
     icon: '/logos/zhihu-daily.png',
     api: 'https://api.ikangjia.cn/zhihu-daily',
-  },
-  {
-    id: 'nga',
-    name: 'NGA',
-    title: '热帖',
-    icon: '/logos/ngabbs.png',
-    api: 'https://api.ikangjia.cn/ngabbs',
   },
   {
     id: 'hupu',
@@ -162,15 +162,6 @@ export const platforms = [
     icon: '/logos/tieba.png',
     api: 'https://api.ikangjia.cn/tieba',
   },
-
-  {
-    id: 'acfun',
-    name: 'ACFun',
-    title: '排行榜',
-    icon: '/logos/acfun.png',
-    api: 'https://api.ikangjia.cn/acfun',
-  },
-
   {
     id: 'douban-movie',
     name: '豆瓣电影',
@@ -222,11 +213,18 @@ export const platforms = [
     api: 'https://api.ikangjia.cn/jianshu',
   },
   {
-    id: 'v2ex',
-    name: 'V2EX',
-    title: '最热',
-    icon: '/logos/v2ex.png',
-    api: 'https://api.ikangjia.cn/v2ex',
+    id: 'acfun',
+    name: 'ACFun',
+    title: '排行榜',
+    icon: '/logos/acfun.png',
+    api: 'https://api.ikangjia.cn/acfun',
+  },
+  {
+    id: 'nga',
+    name: 'NGA',
+    title: '热帖',
+    icon: '/logos/ngabbs.png',
+    api: 'https://api.ikangjia.cn/ngabbs',
   },
   {
     id: 'weatheralarm',
